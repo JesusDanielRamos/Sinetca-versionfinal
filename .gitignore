@@ -2,3 +2,5 @@ conexion.php
 .env
 uploads/
 *.log
+index.html
+README.md
