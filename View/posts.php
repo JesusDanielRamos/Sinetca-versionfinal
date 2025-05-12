@@ -8,7 +8,9 @@ if (!isset($_SESSION['UserID'])) {
     exit;
 }
 
+// Obtener todas las publicaciones
 $posts = Post::getAll();
+// Obtener el ID del usuario actual
 $current_user_id = $_SESSION['UserID'];
 ?>
 
@@ -58,12 +60,29 @@ $current_user_id = $_SESSION['UserID'];
             margin-right: 15px;
             object-fit: cover;
             border: 2px solid #3498db;
+            cursor: pointer;
         }
 
         .author-name {
             font-weight: 600;
             color: #2c3e50;
             font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        .profile-btn {
+            margin-left: auto;
+            background-color: #3498db;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .profile-btn:hover {
+            background-color: #2979b9;
         }
 
         .date {
@@ -114,6 +133,15 @@ $current_user_id = $_SESSION['UserID'];
             background-color: #2979b9;
         }
 
+        .profile-link {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .profile-link:hover {
+            text-decoration: underline;
+        }
+
         .like-btn {
             background-color: #ff4757;
             color: #fff;
@@ -140,8 +168,8 @@ $current_user_id = $_SESSION['UserID'];
 <body>
     <div class="header">
         <h2>Publicaciones</h2>
-        <!-- Enlace al formulario de creación -->
         <a class="btn-publicar" href="crear_post.php">+ Nueva publicación</a>
+        <a class="profile-btn" href="perfil.php?user_id=<?= $current_user_id ?>">Mi Perfil</a>
     </div>
 
     <div class="container">
@@ -150,8 +178,12 @@ $current_user_id = $_SESSION['UserID'];
         <?php foreach ($posts as $post): ?>
             <div class="post">
                 <div class="author">
-                    <img src="../uploads/<?= htmlspecialchars($post['PicProfile'] ?: 'default.jpg') ?>" alt="Imagen de perfil">
-                    <span class="author-name"><?= htmlspecialchars($post['Username']) ?></span>
+                    <a href="perfil.php?user_id=<?= htmlspecialchars($post['user_id']) ?>">
+                        <img src="../uploads/profiles/<?= htmlspecialchars($post['PicProfile'] ?: 'default.jpg') ?>" alt="Imagen de perfil">
+                    </a>
+                    <a class="profile-link" href="perfil.php?user_id=<?= htmlspecialchars($post['user_id']) ?>">
+                        @<?= htmlspecialchars($post['Username']) ?>
+                    </a>
                 </div>
                 <p class="date">Publicado el <?= htmlspecialchars($post['created_at']) ?></p>
                 <h3 class="title"><?= htmlspecialchars($post['title']) ?></h3>
@@ -161,7 +193,6 @@ $current_user_id = $_SESSION['UserID'];
                     <img class="post-image" src="../uploads/<?= htmlspecialchars($post['image']) ?>" alt="Imagen del post">
                 <?php endif; ?>
 
-                <!-- Botón de like -->
                 <form method="POST" action="../Controller/like_controller.php">
                     <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                     <?php $hasLiked = Post::userHasLiked($post['id'], $current_user_id); ?>
@@ -175,6 +206,5 @@ $current_user_id = $_SESSION['UserID'];
             </div>
         <?php endforeach; ?>
     </div>
-
 </body>
 </html>

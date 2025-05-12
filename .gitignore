@@ -4,3 +4,5 @@ uploads/
 *.log
 index.html
 README.md
+assets
+.vscode

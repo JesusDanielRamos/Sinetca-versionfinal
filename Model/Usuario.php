@@ -33,4 +33,33 @@ class Usuario {
         $result = $stmt->get_result();
         return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
     }
+
+    // Método para buscar un usuario por su ID
+public static function buscarPorId($user_id) {
+    global $conn;
+
+    // Preparar la consulta para buscar el usuario por ID
+    $sql = "SELECT * FROM Usuario WHERE UserID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+
+    // Obtener el resultado y verificar si se encontró un usuario
+    $result = $stmt->get_result();
+    return ($result->num_rows > 0) ? $result->fetch_assoc() : null;
+}
+
+   // Método para actualizar el perfil de un usuario
+   public static function actualizarPerfil($user_id, $bio, $profile_image) {
+    global $conn;
+
+    // Preparar la consulta para actualizar el perfil del usuario
+    $sql = "UPDATE  PicProfile = ? WHERE ID = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ssi", $profile_image, $user_id);
+
+    // Ejecutar la consulta y devolver el resultado (true si fue exitoso, false si no)
+    return $stmt->execute();
+}
+
 }
