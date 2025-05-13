@@ -17,4 +17,8 @@ update
 =======
 upload
 uploads
+<<<<<<< HEAD
 >>>>>>> 0e0e4ba (Eliminar archivos no deseados y actualiza .gitignore)
+=======
+.vscode
+>>>>>>> e322053 (Eliminar archivos no deseados y actualiza .gitignore)
