@@ -6,6 +6,7 @@ index.html
 README.md
 assets
 .vscode
+<<<<<<< HEAD
 .htacess
 robots.txt
 config
@@ -13,3 +14,7 @@ known_hosts
 known_hosts.old
 private
 update
+=======
+upload
+uploads
+>>>>>>> 0e0e4ba (Eliminar archivos no deseados y actualiza .gitignore)
