@@ -221,12 +221,20 @@ $posts = Post::getAll($categoriaSeleccionada);
                 </div>
                 <p class="date">Publicado el <?= htmlspecialchars($post['created_at']) ?></p>
                 <h3 class="title"><?= htmlspecialchars($post['title']) ?></h3>
+<<<<<<< HEAD
                 <p class="categoria"><strong>Categoría:</strong> <?= htmlspecialchars($post['categoria'] ?? '') ?></p>
+=======
+                <p class="categoria"><strong>Categoría:</strong> <?= htmlspecialchars($post['categoria']) ?></p>
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
                 <p class="content"><?= nl2br(htmlspecialchars($post['content'])) ?></p>
 
 
                 <?php if (!empty($post['image'])): ?>
+<<<<<<< HEAD
                     <img class="post-image" src="../uploads/<?= htmlspecialchars($post['image'] ?? '') ?>" alt="Imagen del post">
+=======
+                    <img class="post-image" src="../uploads/<?= htmlspecialchars($post['image']) ?>" alt="Imagen del post">
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
                 <?php endif; ?>
 
                 <form method="POST" action="../Controller/like_controller.php">

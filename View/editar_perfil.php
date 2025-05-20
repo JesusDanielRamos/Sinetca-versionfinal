@@ -34,7 +34,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<<<<<<< HEAD
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
     <style>
@@ -116,11 +119,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <button type="submit">Guardar cambios</button>
         </form>
+<<<<<<< HEAD
         
         
     </div>
     <footer>
          <a href="about.php">@Copyright----Sinetica2025</a>
     </footer>
+=======
+    </div>
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 </body>
 </html>

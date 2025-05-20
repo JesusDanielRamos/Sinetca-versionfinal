@@ -10,7 +10,10 @@ if (!isset($_SESSION['UserID'])) {
 // Incluimos la conexión a la base de datos
 include("../conexion.php");
 require_once '../Model/Post.php';
+<<<<<<< HEAD
 include_once("../Model/Usuario.php");
+=======
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 
 // Inicializamos la lista de categorías
 $categorias = [];
@@ -72,6 +75,7 @@ $usuario = Usuario::buscarPorId($current_user_id);
 <div class="form-container">
     <h2>Crear nueva publicación</h2>
 
+<<<<<<< HEAD
     <form id="form-publicar" action="../Controller/guardar_post.php" method="POST" enctype="multipart/form-data">
         <label for="subir_imagen" id="label_de_subir_imagen" class="subir_imagen_label">
             Subir foto
@@ -82,9 +86,15 @@ $usuario = Usuario::buscarPorId($current_user_id);
         <input id="subir_imagen" type="file" name="image" accept="image/*">  
 
         <input id="input_titulo" type="text" name="title" placeholder="Título del proyecto" required>
+=======
+    <form action="../Controller/guardar_post.php" method="POST" enctype="multipart/form-data">
+        <label>Título:</label>
+        <input type="text" name="title" required>
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 
         <textarea id="input_descripcion_post" name="content" placeholder="Descripción / detalles del proyecto" rows="5" required></textarea>
 
+<<<<<<< HEAD
         <div id="#contenedor_select">
             <select name="categoria" id="categoria" required>
                 <option value="">Categoría</option>
@@ -97,6 +107,18 @@ $usuario = Usuario::buscarPorId($current_user_id);
             </select>
         </div>
         
+=======
+        <label>Categoría:</label>
+        <select name="categoria[]" required>
+            <option value="">Seleccione una categoría</option>
+            <?php foreach ($categorias as $categoria): ?>
+                <option value="<?= htmlspecialchars($categoria) ?>"><?= htmlspecialchars($categoria) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <label>Imagen (opcional):</label>
+        <input type="file" name="image" accept="image/*">
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 
         
         <button type="submit">Publicar</button>

@@ -119,6 +119,7 @@ public static function removeLike($post_id, $user_id) {
     return $stmt->execute();
 }
 
+<<<<<<< HEAD
 public static function getAllPorUsuario($user_id) {
     global $conn;
     
@@ -136,6 +137,8 @@ public static function getAllPorUsuario($user_id) {
     $result = $stmt->get_result();
     return $result->fetch_all(MYSQLI_ASSOC);
 }
+=======
+>>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 
 
 }
