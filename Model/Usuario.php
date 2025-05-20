@@ -2,22 +2,43 @@
 include("../conexion.php");
 
 class Usuario {
-    // Método para registrar un nuevo usuario en la base de datos
-    public static function registrar($username, $email, $password, $PicProfile) {
-        global $conn;
+    
+      // Método para registrar un nuevo usuario en la base de datos
+public static function registrar($username, $alias, $email, $password, $PicProfile, $pronombres, $workArea, $workTools, $workModality) {
+    global $conn;
 
-        // Hashear la contraseña para almacenarla de forma segura
-        $passwordHash = password_hash($password, PASSWORD_DEFAULT);
+    // Hashear la contraseña para almacenarla de forma segura
+    $passwordHash = password_hash($password, PASSWORD_DEFAULT);
 
-        // Preparar la consulta SQL para insertar un nuevo usuario con imagen de perfil
-        $sql = "INSERT INTO Usuario (Username, Email, Contrasena, PicProfile) VALUES (?, ?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        // Vincular los parámetros para evitar inyecciones SQL
-        $stmt->bind_param("ssss", $username, $email, $passwordHash, $PicProfile);
+    // Preparar la consulta SQL para insertar un nuevo usuario
+    $sql = "
+    INSERT INTO Usuario (Username, Alias, Email, Contrasena, PicProfile, Pronombres, WorkArea, WorkTools, WorkModality) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param(
+        "sssssssss", 
+        $username, 
+        $alias, 
+        $email, 
+        $passwordHash, 
+        $PicProfile, 
+        $pronombres, 
+        $workArea, 
+        $workTools, 
+        $workModality
+    );
 
-        // Ejecutar la consulta y devolver el resultado (true si fue exitoso, false si no)
-        return $stmt->execute();
+    // Ejecutar la consulta y devolver el resultado (true si fue exitoso, false si no)
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        // Mostrar el error de MySQL para depuración
+        error_log("Error en la consulta de registro: " . $stmt->error);
+        return false;
     }
+}
+
 
     // Método para buscar un usuario por su nombre de usuario (Username)
     public static function buscarPorUsername($username) {

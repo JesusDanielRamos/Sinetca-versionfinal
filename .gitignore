@@ -6,3 +6,10 @@ index.html
 README.md
 assets
 .vscode
+.htacess
+robots.txt
+config
+known_hosts
+known_hosts.old
+private
+update

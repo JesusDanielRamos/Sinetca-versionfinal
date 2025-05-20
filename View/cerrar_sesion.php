@@ -62,7 +62,7 @@ $usuario = Usuario::buscarPorId($current_user_id);
 </head>
 <body>
     <div class="confirm-container">
-        <h2>¿Estás seguro de que deseas cerrar sesión?</h2>
+        <h2>¿Ya te vas?</h2>
         <form action="../logout.php" method="POST">
             <button type="submit">Sí, cerrar sesión</button>
         </form>

@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <title>Editar Perfil</title>
     <style>
@@ -115,6 +116,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <button type="submit">Guardar cambios</button>
         </form>
+        
+        
     </div>
+    <footer>
+         <a href="about.php">@Copyright----Sinetica2025</a>
+    </footer>
 </body>
 </html>

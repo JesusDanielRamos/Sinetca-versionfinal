@@ -16,10 +16,13 @@ $content = trim($_POST['content']);
 $imageName = null;
 
 // Validación básica
-if (empty($title) || empty($content)) {
+if (empty($title) || empty($content) || empty($_POST['categoria'])) {
     echo "Todos los campos son obligatorios.";
     exit;
 }
+
+// Procesamiento de la categoría (puede ser múltiple)
+$categoria = is_array($_POST['categoria']) ? implode(", ", $_POST['categoria']) : $_POST['categoria'];
 
 // Procesamiento de la imagen
 if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
@@ -40,14 +43,23 @@ $data = [
     'user_id' => $user_id,
     'title' => $title,
     'content' => $content,
+    'categoria' => $categoria,  // Usa la variable $categoria correctamente
     'image' => $imageName
 ];
+
+ // Mostrar todo el contenido de $_POST y $_FILES para debug
+ echo "<pre>";
+ print_r($_POST);
+ print_r($_FILES);
+ echo "</pre>";
 
 // Guardamos la publicación
 if (Post::create($data)) {
     header("Location: ../View/posts.php");
     exit;
 } else {
-    echo "Error al guardar la publicación.";
+    
+    echo "Error al guardar la publicación: " . $conn->error;
 }
+
 ?>
