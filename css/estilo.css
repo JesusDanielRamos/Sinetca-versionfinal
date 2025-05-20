@@ -91,7 +91,7 @@ body {
     flex: 1;
 }
 .login-container {
-    width: 100%;
+
     
 }
 .top_nav_main{
@@ -228,10 +228,11 @@ body {
     flex-direction: row;
     padding: 0px 0px;
     margin: 0px;
+    text-decoration: none;
 }
-.nav_filtros li:first-child{
-    background-color: #9B8AED;
-}
+
+
+
 .nav_main div{
     width: 100%;
 }
@@ -399,7 +400,7 @@ button{
 
 .post {
     background: #eef0db;
-    
+ 
     
 }
 .container::after{
@@ -432,6 +433,7 @@ button{
 .post {
     padding: 0px 30px;
     border: #292022 1px solid;
+    max-width: 80%!important;
 }
 
 
@@ -761,3 +763,14 @@ h3{
     border: #292022 1px solid;
 }
 .izquierda{color: #eef0db;}
+
+
+@media (max-width: 768px) {
+    .nav_main li {
+        width: 100%;
+        text-align: center;
+    }
+    .barra_like_conectar {
+        flex-direction: column;
+    }
+}

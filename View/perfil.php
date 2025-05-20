@@ -1,19 +1,13 @@
 <?php
 session_start();
 include_once("../Model/Usuario.php");
-<<<<<<< HEAD
 include_once("../Model/Post.php");
 
-=======
-
-// Verificamos si el usuario ha iniciado sesión
->>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 if (!isset($_SESSION['UserID'])) {
     header("Location: ../View/login.php");
     exit;
 }
 
-<<<<<<< HEAD
 $current_user_id = $_SESSION['UserID'];
 $profile_user_id = $_GET['user_id'] ?? $current_user_id;
 
@@ -23,16 +17,6 @@ $is_current_page_own_profile = basename($_SERVER['PHP_SELF']) === 'perfil.php' &
 
 $usuario = Usuario::buscarPorId($profile_user_id);
 $posts = Post::getAllPorUsuario($profile_user_id);
-=======
-// Obtener el ID del usuario actual
-$current_user_id = $_SESSION['UserID'];
-$profile_user_id = $_GET['user_id'];
-$usuario = Usuario::buscarPorId($profile_user_id);
-
-// Verificar si es su propio perfil
-$is_own_profile = ($current_user_id == $profile_user_id);
-
->>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +24,6 @@ $is_own_profile = ($current_user_id == $profile_user_id);
 <head>
     <meta charset="UTF-8">
     <title>Perfil de <?= htmlspecialchars($usuario['Username']) ?></title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="/css/estilo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
@@ -54,7 +37,7 @@ $is_own_profile = ($current_user_id == $profile_user_id);
 <body>
 
 <div class="top_nav_main">
-    <div class="top_nav_izquierda_main">SINETICA</div>
+    <div class="top_nav_izquierda_main"><a href="posts.php" style="text-decoration: none; color: inherit;">SINETICA </a></div>
     <div class="top_nav_derecha_main">
     <?php if ($is_own_profile): ?>
             MI PERFIL
@@ -86,8 +69,8 @@ $is_own_profile = ($current_user_id == $profile_user_id);
 
             <div class="barra_modos">
                 <ul>
-                    <li id="modo_virtual" class="<?= $usuario['WorkModality'] === 'Virtual' ? 'modo-activo' : '' ?>">VIRTUAL</li>
-                    <li id="modo_hibrido" class="<?= $usuario['WorkModality'] === 'Híbrido' ? 'modo-activo' : '' ?>">HÍBRIDO</li>
+                    <li id="modo_virtual" class="<?= $usuario['WorkModality'] === 'Remota' ? 'modo-activo' : '' ?>">VIRTUAL</li>
+                    <li id="modo_hibrido" class="<?= $usuario['WorkModality'] === 'Mixta' ? 'modo-activo' : '' ?>">HÍBRIDO</li>
                     <li id="modo_presencial" class="<?= $usuario['WorkModality'] === 'Presencial' ? 'modo-activo' : '' ?>">PRESENCIAL</li>
                 </ul>
             </div>
@@ -101,7 +84,7 @@ $is_own_profile = ($current_user_id == $profile_user_id);
                     <h2>INFORMACIÓN PERSONAL</h2>
                     <p> <?= htmlspecialchars($usuario['Alias']  ?? '') ?></p>
                     <p> <?= htmlspecialchars($usuario['Email']  ?? '') ?></p>
-                    <p> <?= nl2br(htmlspecialchars($usuario['bio'] ?? 'Este usuario no tiene biografía.')) ?></p>
+                    <p> <?= nl2br(htmlspecialchars($usuario['Bio'] ?? 'Este usuario no tiene biografía.')) ?></p>
                 </div>
                 <div class="area_de_trabajo">
                     <h2>ÁREAS DE TRABAJO</h2><p> <?= htmlspecialchars($usuario['WorkArea']  ?? '') ?></p>
@@ -198,92 +181,5 @@ function mostrarSeccion(seccion) {
 
 </script>
 
-=======
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            margin: 0;
-            padding: 20px;
-        }
-        .profile-container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-        }
-        .profile-container img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-        .profile-container h2 {
-            margin: 0 0 10px 0;
-        }
-        .profile-container p {
-            color: #555;
-        }
-        .btn-back {
-            display: inline-block;
-            background-color: #3498db;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 20px;
-            transition: background-color 0.2s ease;
-        }
-        .btn-back:hover {
-            background-color: #2979b9;
-        }
-        .btn-edit {
-            display: inline-block;
-            background-color: #2ecc71;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-bottom: 20px;
-            transition: background-color 0.2s ease;
-        }
-        .btn-edit:hover {
-            background-color: #27ae60;
-        }
-         .logout-btn {
-            display: block;
-            background-color: #f04a27;
-            color: #ffffff;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: bold;
-            text-align: center;
-            margin-top: 20px;
-            transition: background-color 0.2s ease;
-        }
-        .logout-btn:hover {
-            background-color: #bf2100;
-        }
-    </style>
-</head>
-<body>
-    <div class="profile-container">
-        <img src="../uploads/profiles/<?= htmlspecialchars($usuario['PicProfile'] ?: 'default.jpg') ?>" alt="Imagen de perfil">
-        <h2>@<?= htmlspecialchars($usuario['Username']) ?></h2>
-        <p><?= nl2br(htmlspecialchars($usuario['bio'] ?: 'Este usuario no tiene biografía.')) ?></p>
-
-        <a href="Home.php" class="btn-back">Regresar</a>
-        <?php if ($is_own_profile): ?>
-            <a href="editar_perfil.php" class="btn-edit">Editar perfil</a>
-            <a href="cerrar_sesion.php" class="logout-btn">Cerrar sesión</a>
-        <?php endif; ?>
-    </div>
->>>>>>> 7a8759c (Actualizar .gitignore y limpiar archivos no deseados)
 </body>
 </html>
