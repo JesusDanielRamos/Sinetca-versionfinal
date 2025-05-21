@@ -140,6 +140,20 @@ public static function removeLike($post_id, $user_id) {
     return $stmt->execute();
 }
 
+public static function countLikes($post_id) {
+    global $conn;
+    
+    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM Likes WHERE PostID = ?");
+    
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    return $row['total'] ?? 0;
+}
+
 public static function getAllPorUsuario($user_id) {
     global $conn;
     

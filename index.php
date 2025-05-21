@@ -53,7 +53,7 @@
         </div>
         <div class="bottom_nav">
             <div class="tercio_izquierdo">
-
+                 <a href="View/about.php" >@Copyright----Sinetica2025 </a>
             </div>
             <div class="dos_tercios_derecha">
                 <button id="btn_login">INICIAR SESIÓN</button>
@@ -93,5 +93,49 @@
         document.getElementById("form-login").submit();
         });
     </script>
+
+
+
+    <!-- Modal de error -->
+    <div id="modal-error" style="display: none;" class="modal-error">
+        <div class="modal-contenido">
+            <p>Usuario o contraseña incorrectos.</p>
+            <button onclick="cerrarModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <style>
+    .modal-error {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+    }
+    .modal-contenido {
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+    </style>
+
+    <script>
+    function cerrarModal() {
+        document.getElementById('modal-error').style.display = 'none';
+    }
+
+    // Mostrar modal si hay error en la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('error') === '1') {
+        document.getElementById('modal-error').style.display = 'flex';
+    }
+    </script>
+
 </body>
 </html>

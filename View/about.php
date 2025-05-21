@@ -219,21 +219,43 @@ input[id="5"]:checked ~ .pagina .pagina-item[for="5"]{
      <link rel="stylesheet" href="/css/estilo.css">
 </head>
 <body>
-    <h1>About Us - Sinetica</h1>
+    <div class="top_nav_main">
+            <div class="top_nav_izquierda_main"> 
+            <a href="../index.php" style="text-decoration: none; color: inherit;">SINETICA </a>
+            </div>
+            <div class="top_nav_derecha_main">
+                ABOUT
+            </div>
+        </div>
+    <h1 style="margin-top: 150px">About Us - Sinetica</h1>
     <p style="text-align: center; font-family: 'Montserrat', sans-serif; margin:20px 30px; font-size: 1.1rem; color: #555;">
         Sinetica consiste en el desarrollo de una página web que ofrece un espacio digital para que profesionales y entusiastas del diseño puedan publicar y exhibir sus portafolios. La plataforma está pensada para facilitar la conexión entre diseñadores, proveedores de servicios y clientes potenciales. Su finalidad es destacar y promover el talento del ecosistema creativo de Ciudad Juárez, al mismo tiempo que impulsa la colaboración y la visibilidad del sector.
     </p>
     
     <p style="text-align: center; font-family: 'Montserrat', sans-serif; margin-bottom: 2rem; font-size: 1.1rem; color: #555;">
-        Las fuentes utilizadas para este proyecto son <strong>Ribes-Black</strong> y <strong>VG5000</strong>, seleccionadas para reflejar nuestra identidad única y creativa.
+        Las fuentes utilizadas para este proyecto son <strong>Ribes-Light</strong>, <strong>Ribes-Black</strong> y <strong>VG5000</strong>, seleccionadas para reflejar nuestra identidad única y creativa.
     </p>
+
     <div style="text-align: center; margin-bottom: 2rem;">
+        <h2>Sinetica.fun</h2>
         <img src="../assets/qrcode-sinetica.png" alt="Código QR" style="width: 200px; border-radius: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    </div>
+    
+     <div style="text-align: center; margin-bottom: 2rem;">
+         <h2>Github</h2>
+        <img src="../assets/qrcode-github.png" style="width: 200px;  border-radius: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+    </div>
+
+      <div style="text-align: center; margin-bottom: 2rem;">
+         <h2>Diagrama de sitio</h2>
+        <img src="../assets/diagramaFlechas.png" alt="Código QR" style="width: 400px; height:400px; border-radius: 1rem; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
     </div>
      <div style="text-align: center; margin-top: 3rem; padding: 1rem; ">
       <a href="about.php" style=" text-decoration: none;">© Copyright----Sinetica 2025 </a>  Todos los derechos reservados.
     </div>
+    <h2 style="text-align: center; margin-bottom: 2rem;">Paleta de colores</h2>
     <div class="color-container">
+        
         <div class="color-card">
             <div class="color-block" style="background-color: #F96E46;"></div>
             <div class="color-info">

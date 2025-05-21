@@ -31,6 +31,7 @@ if ($result->num_rows > 0) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -41,6 +42,31 @@ if ($result->num_rows > 0) {
 
     <title>Registro de Usuario - Sinetica</title>
     
+    <style> 
+        /* Botón de registro */
+        .btn-registrarse {
+            background-color: #9B8AED;
+            color: #2c3e50;
+            border: none;
+            padding: 5px 5px;
+            
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 50%; /* Puedes quitarlo si no lo quieres tan ancho */
+             /* Opcional */
+             margin-top: 8px;
+        }
+
+        /* Hover */
+        .btn-registrarse:hover {
+            background-color: #7c6bcc;
+        }
+
+
+
+    </style>
     
 </head>
 <body>
@@ -67,52 +93,61 @@ if ($result->num_rows > 0) {
         </div>
         <div id="espacio" style="height: 150px"></div>
         <div class="login-container">
-            <form id="form-register" action="../Controller/AuthController.php" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="action" value="register">
-                <label for="username">NOMBRE DE USUARIO</label>
-                <input type="text" name="username" placeholder="Nombre de usuario" required>
-                <label for="alias">ALIAS</label>
-                <input type="text" name="alias" placeholder="Alias" required>
-                <label for="email">EMAIL</label>
-                <input type="email" name="email" placeholder="Correo electrónico" required>
-                <label for="password">CONTRASEÑA</label>
-                <input type="password" name="password" placeholder="Contraseña" required>
-                <label for="pronombres">PRONOMBRES</label>
-                <input type="text" name="pronombres" placeholder="Pronombres" required>
-                <label for="PicProfile">FOTO DE PERFIL</label>
-                <input id="input_foto" type="file" name="PicProfile" accept="image/*">
+                      <form id="form-register" action="../Controller/AuthController.php" method="POST" enctype="multipart/form-data" style="justify-content: center;">
+    <input type="hidden" name="action" value="register">
 
-                <!-- Área de Trabajo -->
-                 <label for="WorkArea">ÁREA DE TRABAJO</label>
-                <select name="WorkArea" required>
-                    <option value="" disabled selected>Selecciona una...</option>
-                    <?php foreach ($workAreas as $area): ?>
-                        <option value="<?= htmlspecialchars($area) ?>"><?= htmlspecialchars($area) ?></option>
-                    <?php endforeach; ?>
-                </select>
+    <!-- PASO 1 -->
+    <div id="paso1">
+        <label for="username">NOMBRE DE USUARIO</label>
+        <input type="text" name="username" required>
+        <label for="alias">ALIAS</label>
+        <input type="text" name="alias" required>
+        <label for="email">EMAIL</label>
+        <input type="email" name="email" required>
+        <label for="password">CONTRASEÑA</label>
+        <input type="password" name="password" required>
 
-                <label for="WorkTools">HERRAMIENTAS DE TRABAJO</label>
-                <!-- Herramientas de Trabajo -->
-                <select name="WorkTools" required>
-                    <option value="" disabled selected>Selecciona una...</option>
-                    <?php foreach ($workTools as $tool): ?>
-                        <option value="<?= htmlspecialchars($tool) ?>"><?= htmlspecialchars($tool) ?></option>
-                    <?php endforeach; ?>
-                </select>
+        <button class="btn-registrarse" type="button" onclick="mostrarPaso2()">---> </button>
+    </div>
 
-                <!-- Modalidad de Trabajo -->
-                 <label for="WorkModality">MODALIDAD DE TRABAJO</label>
-                <select name="WorkModality" required>
-                    <option value="" disabled selected>Selecciona una...</option>
-                    <?php foreach ($workModalities as $modality): ?>
-                        <option value="<?= htmlspecialchars($modality) ?>"><?= htmlspecialchars($modality) ?></option>
-                    <?php endforeach; ?>
-                </select>
-                
-                
-                
-            </form>
-            
+    <!-- PASO 2 -->
+    <div id="paso2" style="display:none">
+        <label for="pronombres">PRONOMBRES</label>
+        <input type="text" name="pronombres" required>
+        <label for="PicProfile">FOTO DE PERFIL</label>
+        <input id="input_foto" type="file" name="PicProfile" accept="image/*">
+        <label for="WorkArea">ÁREA DE TRABAJO</label>
+        <select name="WorkArea" required>
+            <option value="" disabled selected>Selecciona una...</option>
+            <?php foreach ($workAreas as $area): ?>
+                <option value="<?= htmlspecialchars($area) ?>"><?= htmlspecialchars($area) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <label for="WorkTools">HERRAMIENTAS DE TRABAJO</label>
+        <select name="WorkTools" required>
+            <option value="" disabled selected>Selecciona una...</option>
+            <?php foreach ($workTools as $tool): ?>
+                <option value="<?= htmlspecialchars($tool) ?>"><?= htmlspecialchars($tool) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <label for="WorkModality">MODALIDAD DE TRABAJO</label>
+        <select name="WorkModality" required>
+            <option value="" disabled selected>Selecciona una...</option>
+            <?php foreach ($workModalities as $modality): ?>
+                <option value="<?= htmlspecialchars($modality) ?>"><?= htmlspecialchars($modality) ?></option>
+            <?php endforeach; ?>
+        </select>
+
+        <button class="btn-registrarse" type="button" onclick="mostrarPaso1()"><----</button>
+        <button class="btn-registrarse"  type="submit">CREAR CUENTA</button>
+    </div>
+</form>
+
+        <div class="imagen_fondo">
+            <img src="../assets/candado.svg" alt="">
+        </div>
         </div>
 
         <div class="bottom_nav">
@@ -132,6 +167,20 @@ if ($result->num_rows > 0) {
         document.querySelector(".p_izq").style.backgroundColor = "#eef0db";
         document.querySelector(".p_der").style.backgroundColor = "#9B8AED";
     </script>
+
+    <script>
+function mostrarPaso2() {
+    document.getElementById('paso1').style.display = 'none';
+    document.getElementById('paso2').style.display = 'block';
+}
+
+function mostrarPaso1() {
+    document.getElementById('paso2').style.display = 'none';
+    document.getElementById('paso1').style.display = 'block';
+}
+</script>
+
+    
 </body>
 
 </html>

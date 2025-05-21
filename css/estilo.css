@@ -279,6 +279,7 @@ body {
     padding-top: 10px;
     background-color: transparent;
     border: #292022 1px solid;
+   
 
 }
 #form-login label, #form-register label{
@@ -433,7 +434,7 @@ button{
 .post {
     padding: 0px 30px;
     border: #292022 1px solid;
-    max-width: 80%!important;
+   
 }
 
 
@@ -765,12 +766,30 @@ h3{
 .izquierda{color: #eef0db;}
 
 
-@media (max-width: 768px) {
-    .nav_main li {
-        width: 100%;
-        text-align: center;
+@media (min-width: 768px) {
+   
+    .post{
+        width: 50%;
+        margin: 0px auto;
     }
-    .barra_like_conectar {
-        flex-direction: column;
+
+    body{
+        background: #eef0db;
     }
+
+    .seccion-info img{
+        width: 50%;
+        max-height: 75vh;
+        margin: 0px auto;
+    }
+
+    .login-container{
+        width: 50%;
+        margin: 0px auto;
+    }
+    
+    .imagen_fondo img{
+        max-width: 20%;
+    }
+   
 }
