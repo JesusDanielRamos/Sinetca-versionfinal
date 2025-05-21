@@ -41,12 +41,15 @@
                 <input type="password" name="password" placeholder="Contraseña" required>
             </form>
         </div>
-        <div class="imagen_fondo">
-            <img src="../assets/llave.svg" alt="">
+        
+        <div class="espacio-scroll modo-activo">
+            <div class="imagen_fondo ">
+                <img src="../assets/llave.svg" alt="">
+            </div>
         </div>
         <div class="bottom_nav">
             <div class="tercio_izquierdo">
-         <a href="about.php">@Copyright----Sinetica2025</a>
+         
 
             </div>
             <div class="dos_tercios_derecha">

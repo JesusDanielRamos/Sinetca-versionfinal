@@ -24,7 +24,7 @@ $posts = Post::getAllPorUsuario($profile_user_id);
 <head>
     <meta charset="UTF-8">
     <title>Perfil de <?= htmlspecialchars($usuario['Username']) ?></title>
-    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         .seccion-perfil { display: none; }
@@ -50,8 +50,8 @@ $posts = Post::getAllPorUsuario($profile_user_id);
 
 <div class="nav_perfil">
     <ul class="nav_mitad">
-        <li class="tab-btn crema" id="btn-posts"><a  href="#"  onclick="mostrarSeccion('posts')">PUBLICACIONES</a></li>
-        <li class="tab-btn morado" id="btn-info"><a  href="#"  onclick="mostrarSeccion('info')">INFORMACIÓN</a></li>
+        <li class=" crema" id="btn-posts"><a  href="#"  onclick="mostrarSeccion('posts')">PUBLICACIONES</a></li>
+        <li class=" morado" id="btn-info"><a  href="#"  onclick="mostrarSeccion('info')">INFORMACIÓN</a></li>
     </ul>
 </div>
 
@@ -89,7 +89,7 @@ $posts = Post::getAllPorUsuario($profile_user_id);
                 <div class="area_de_trabajo">
                     <h2>ÁREAS DE TRABAJO</h2><p> <?= htmlspecialchars($usuario['WorkArea']  ?? '') ?></p>
                 </div>
-                <div class="herramientas">
+                <div class="herramientas borde_abajo">
                     <h2>HERRAMIENTAS</h2><p> <?= htmlspecialchars($usuario['WorkTools']  ?? '') ?></p>
                 </div>
             </div>
@@ -99,87 +99,111 @@ $posts = Post::getAllPorUsuario($profile_user_id);
         </div>
 
         <!-- PUBLICACIONES -->
-        <div id="seccion-posts" class="seccion-perfil">
-            <h3>Publicaciones</h3>
+        <div id="seccion-posts" class="seccion-perfil" >
             <?php if ($posts): ?>
                 <?php foreach ($posts as $post): ?>
+                    <?php 
+                        $likeCount = Post::contarLikes($post['id']);
+                    ?>
                     
-                    <div class="post">
-                    <?php if (!empty($post['image'])): ?>
-                        <img class="post-image" src="../uploads/<?= htmlspecialchars($post['image']) ?>" alt="Imagen del post">
-                    <?php endif; ?>
-                        <h4><?= htmlspecialchars($post['title']) ?></h4>
-                        <p><?= nl2br(htmlspecialchars($post['content'])) ?></p>
+                    <div class="post sin_borde">
+                        <div class="author">
+                            <a class="profile-link" href="perfil.php?user_id=<?= htmlspecialchars($post['user_id'] ?? '') ?>">
+                                @<?= htmlspecialchars($post['Username'] ?? '') ?>
+                            </a>
+                            <p class="categoria"> <?= htmlspecialchars($post['categoria'] ?? '') ?></p>
+                        </div>
+                        <?php if (!empty($post['image'])): ?>
+                            <img class="post-image" src="../uploads/<?= htmlspecialchars($post['image'] ?? '') ?>" alt="Imagen del post">
+                        <?php endif; ?>
+
+                        <h3 class="title"><?= htmlspecialchars($post['title']?? '') ?></h3>
+
+                    
+                        <p class="content"><?= nl2br(htmlspecialchars($post['content'] ?? '')) ?></p>
                     </div>
+
+                    <div class="barra_like_conectar borde_abajo">
+                        <div class="like sin_borde">
+                            <p id="likes" style=" width: 50px; margin:0px;"> ⬤ <?= $likeCount ?> <?= $likeCount != 1 ? '' : '' ?>
+                            </p>                            
+                        </div>
+                        <div class="fecha sin_borde">
+                            <p class="date" style="padding-top:5px;"><?= date('Y-m-d', strtotime($post['created_at'])) ?></p>
+                        </div>
+                    </div>
+
                 <?php endforeach; ?>
+                </div>
+            
             <?php else: ?>
                 <p>Este usuario no ha publicado nada aún.</p>
             <?php endif; ?>
-        </div>
+        </div>    
+    
 
-    </div>
-
-    <div class="cerrar_sesion" style="<?= $is_own_profile ? 'display: block' : 'display: none;' ?>">
-        <?php if ($is_own_profile): ?>
-            <a href="cerrar_sesion.php" class="logout-btn">Cerrar sesión</a>
-        <?php endif; ?>
-    </div>
-</div>
-<div class="bottom_nav_main">
-    <div class="izquierda">
-        <?php if ($is_own_profile): ?>
-            <a href="editar_perfil.php" class="btn-edit">Editar perfil</a>
-        <?php else: ?>
-            <a style="text-decoration: none!important;
-    color: #eef0db!important;" href="posts.php">Comunidad</a>
-        <?php endif; ?>
-    </div>
-    <div class="derecha ">
-        <div class="<?= $is_own_profile ? 'crema' : 'morado' ?>">
+        <div class="cerrar_sesion" style="<?= $is_own_profile ? 'display: block' : 'display: none;' ?>">
             <?php if ($is_own_profile): ?>
-                <a href="posts.php">Comunidad</a>
-            <?php else: ?>
-                <a href="" >Conectar con</a>
+                <a href="cerrar_sesion.php" class="logout-btn">Cerrar sesión</a>
             <?php endif; ?>
         </div>
-        <div class="<?= $is_own_profile ? 'morado' : 'crema' ?>">
-            <a class="profile-btn" href="perfil.php?user_id=<?= $current_user_id ?>">Mi Perfil</a>
+        <div class="bottom_nav_main">
+            <div class="izquierda">
+                <?php if ($is_own_profile): ?>
+                    <a href="editar_perfil.php" class="btn-edit">Editar perfil</a>
+                <?php else: ?>
+                    <a style="text-decoration: none!important;
+            color: #eef0db!important;" href="posts.php">Comunidad</a>
+                <?php endif; ?>
+            </div>
+        
+            <div class="derecha ">
+                <div class="<?= $is_own_profile ? 'crema' : 'morado' ?>">
+                    <?php if ($is_own_profile): ?>
+                        <a href="posts.php">Comunidad</a>
+                    <?php else: ?>
+                        <a href="" >Conectar con</a>
+                    <?php endif; ?>
+                </div>
+                <div class="<?= $is_own_profile ? 'morado' : 'crema' ?>">
+                    <a class="profile-btn" href="perfil.php?user_id=<?= $current_user_id ?>">Mi Perfil</a>
 
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-
-<script>
-
-function mostrarSeccion(seccion) {
-    const infoDiv = document.getElementById("seccion-info");
-    const postsDiv = document.getElementById("seccion-posts");
-
-    const btnInfo = document.getElementById("btn-info");
-    const btnPosts = document.getElementById("btn-posts");
-
-    // Ocultar todas las secciones
-    infoDiv.classList.remove("seccion-activa");
-    postsDiv.classList.remove("seccion-activa");
-
-    // Resetear colores
-    btnInfo.classList.remove("morado", "crema");
-    btnPosts.classList.remove("morado", "crema");
-
-    // Activar la sección y aplicar el color
-    if (seccion === 'info') {
-        infoDiv.classList.add("seccion-activa");
-        btnInfo.classList.add("morado");
-        btnPosts.classList.add("crema");
-    } else {
-        postsDiv.classList.add("seccion-activa");
-        btnPosts.classList.add("morado");
-        btnInfo.classList.add("crema");
-    }
-}
 
 
-</script>
+    <script>
+        function mostrarSeccion(seccion) {
+            sessionStorage.setItem('pestanaPerfil', seccion);
+            const infoDiv = document.getElementById("seccion-info");
+            const postsDiv = document.getElementById("seccion-posts");
+            const btnInfo = document.getElementById("btn-info");
+            const btnPosts = document.getElementById("btn-posts");
 
-</body>
+            infoDiv.classList.remove("seccion-activa");
+            postsDiv.classList.remove("seccion-activa");
+            btnInfo.classList.remove("morado", "crema");
+            btnPosts.classList.remove("morado", "crema");
+
+            if (seccion === 'info') {
+                infoDiv.classList.add("seccion-activa");
+                btnInfo.classList.add("morado");
+                btnPosts.classList.add("crema");
+            } else {
+                postsDiv.classList.add("seccion-activa");
+                btnPosts.classList.add("morado");
+                btnInfo.classList.add("crema");
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const pestañaGuardada = sessionStorage.getItem('pestanaPerfil');
+            mostrarSeccion(pestañaGuardada || 'posts');
+        });
+    </script>
+
+
+
+    </body>
 </html>

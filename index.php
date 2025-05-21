@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="css/estilo.css">
     <title>Registro - Sinetica</title>
     
 </head>
@@ -15,7 +15,7 @@
             <div id="barra">
 
                 <div id="progreso"><p id="porcentaje">0%</p></div></div>
-            <div id="manos"><img src="/assets/inicio.svg" alt=""></div>
+            <div id="manos"><img src="assets/inicio.svg" alt=""></div>
         </div>
 
         <!-- Contenido principal -->
@@ -35,21 +35,26 @@
             </div>
             <div>
                 <p class="p_der">
-                <a href="/View/Registro.php">REGISTRARME</a>
+                <a href="View/Registro.php">REGISTRARME</a>
                 </p>
             </div>
         </div>
-        <div class="login-container">
-            <form id="form-login" action="/Controller/AuthController.php" method="POST" class="registro">
-                <input type="hidden" name="action" value="login">
-                <label for="username">NOMBRE DE USUARIO</label>
-                <input type="text" name="username" placeholder="Username" required>
-                <label for="password">CONTRASEÑA</label>
-                <input type="password" name="password" placeholder="Contraseña" required>
-            </form>
-        </div>
-        <div class="imagen_fondo">
-            <img src="/assets/llave.svg" alt="">
+        
+            <div class="login-container">
+                <form id="form-login" action="Controller/AuthController.php" method="POST" class="registro">
+                    <input type="hidden" name="action" value="login">
+                    <label for="username">NOMBRE DE USUARIO</label>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <label for="password">CONTRASEÑA</label>
+                    <input type="password" name="password" placeholder="Contraseña" required>
+                </form>
+            </div>
+            
+        
+        <div class="espacio-scroll modo-activo">
+            <div class="imagen_fondo ">
+                <img src="assets/llave.svg" alt="">
+            </div>
         </div>
         <div class="bottom_nav">
             <div class="tercio_izquierdo">

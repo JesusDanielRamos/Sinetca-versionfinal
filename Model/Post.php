@@ -139,6 +139,30 @@ public static function removeLike($post_id, $user_id) {
 
     return $stmt->execute();
 }
+public static function contarLikes($postId) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(*) as total FROM Likes WHERE PostID = ?");
+    $stmt->bind_param("i", $postId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    return $row['total'];
+}
+public static function actualizarPost($id, $titulo, $contenido, $categoria, $imagen = null) {
+    global $conn;
+
+    if ($imagen) {
+        $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ?, categoria = ?, image = ? WHERE id = ?");
+        $stmt->bind_param("ssssi", $titulo, $contenido, $categoria, $imagen, $id);
+    } else {
+        $stmt = $conn->prepare("UPDATE posts SET title = ?, content = ?, categoria = ? WHERE id = ?");
+        $stmt->bind_param("sssi", $titulo, $contenido, $categoria, $id);
+    }
+
+    return $stmt->execute();
+}
+
+
 
 public static function getAllPorUsuario($user_id) {
     global $conn;

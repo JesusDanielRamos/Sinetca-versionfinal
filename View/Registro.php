@@ -37,7 +37,7 @@ if ($result->num_rows > 0) {
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
 
     <title>Registro de Usuario - Sinetica</title>
     
@@ -56,17 +56,17 @@ if ($result->num_rows > 0) {
         <div class="nav">
             <div>
                 <p class="p_izq">
-                <a href="../Login.php">INICIAR SESIÓN</a>
+                <a href="Login.php">INICIAR SESIÓN</a>
                 </p>
             </div>
             <div>
                 <p class="p_der">
-                <a href="/View/Registro.php">REGISTRARME</a>
+                <a href="View/Registro.php">REGISTRARME</a>
                 </p>
             </div>
         </div>
         <div id="espacio" style="height: 150px"></div>
-        <div class="login-container">
+        <div class="login-container espacio-scroll">
             <form id="form-register" action="../Controller/AuthController.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="action" value="register">
                 <label for="username">NOMBRE DE USUARIO</label>

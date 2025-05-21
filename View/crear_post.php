@@ -41,7 +41,7 @@ $usuario = Usuario::buscarPorId($current_user_id);
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo.css">
 
     <title>Crear nueva publicación</title>
     <style>
@@ -72,8 +72,8 @@ $usuario = Usuario::buscarPorId($current_user_id);
 <div class="form-container">
     <h2>Crear nueva publicación</h2>
 
-    <form id="form-publicar" action="../Controller/guardar_post.php" method="POST" enctype="multipart/form-data">
-        <label for="subir_imagen" id="label_de_subir_imagen" class="subir_imagen_label">
+    <form id="form-publicar" class="espacio-scroll" action="../Controller/guardar_post.php" method="POST" enctype="multipart/form-data">
+        <label for="subir_imagen" id="label_de_subir_imagen" class="subir_imagen_label ">
             Subir foto
             <div id="imagen_placeholder">
                 <img id="imagen_post"src="../assets/subir_imagen.svg" alt="">

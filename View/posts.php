@@ -133,9 +133,9 @@ $categorias = Post::getCategorias();
 
     <div class="container">
         <?php foreach ($posts as $post): ?>
+
             <div class="post">
                 <div class="author">
-                    
                     <a class="profile-link" href="perfil.php?user_id=<?= htmlspecialchars($post['user_id'] ?? '') ?>">
                         @<?= htmlspecialchars($post['Username'] ?? '') ?>
                     </a>
@@ -144,18 +144,13 @@ $categorias = Post::getCategorias();
                 <?php if (!empty($post['image'])): ?>
                     <img class="post-image" src="../uploads/<?= htmlspecialchars($post['image'] ?? '') ?>" alt="Imagen del post">
                 <?php endif; ?>
-                <!-- <p class="date">Publicado el <?= htmlspecialchars($post['created_at']) ?></p> -->
+                 
                 <h3 class="title"><?= htmlspecialchars($post['title'] ?? '') ?></h3>
                 
                 <p class="content"><?= nl2br(htmlspecialchars($post['content'] ?? '')) ?></p>
-
-
-                
-                
-                
             </div>
             <div class="barra_like_conectar">
-                    <div class="like">
+                <div class="like">
                     <form class="form_like" method="POST" action="../Controller/like_controller.php">
                         <input type="hidden" name="post_id" value="<?= $post['id'] ?>">
                         <?php $hasLiked = Post::userHasLiked($post['id'], $current_user_id); ?>
@@ -165,31 +160,31 @@ $categorias = Post::getCategorias();
                     </form>
                     </div>
                     <div class="conectar">
-                    <a href="perfil.php?user_id=<?= htmlspecialchars($post['user_id']) ?>">
-                            CONECTAR
-                    </a>
+                        <a href="perfil.php?user_id=<?= htmlspecialchars($post['user_id']) ?>">
+                                CONECTAR
+                        </a>
                     </div>
                 </div>
-        <?php endforeach; ?>
-    </div>
-    <div id=crear_publicacion>
-        <button><a class="btn-publicar" href="crear_post.php">Crear publicación</a></button>
-    </div>
-    <div class="bottom_nav_main">
-            <div class="izquierda">
-            Yo soy <br> @<?= htmlspecialchars($usuario['Username']  ?? '') ?>
-                
-            </div>
-            <div class="derecha">
-                <div class="<?= $current_page === 'posts.php' ? 'morado' : 'crema' ?>">
-                    <a href="">Comunidad</a>
+            <?php endforeach; ?>
+        </div>
+        <div id=crear_publicacion>
+            <button><a class="btn-publicar" href="crear_post.php">Crear publicación</a></button>
+        </div>
+        <div class="bottom_nav_main">
+                <div class="izquierda">
+                Yo soy <br> @<?= htmlspecialchars($usuario['Username']  ?? '') ?>
+                    
                 </div>
-                <div>
-                    <a class="profile-btn" href="perfil.php?user_id=<?= $current_user_id ?>">Mi Perfil</a>
+                <div class="derecha">
+                    <div class="<?= $current_page === 'posts.php' ? 'morado' : 'crema' ?>">
+                        <a href="">Comunidad</a>
+                    </div>
+                    <div>
+                        <a class="profile-btn" href="perfil.php?user_id=<?= $current_user_id ?>">Mi Perfil</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 </html>
